@@ -1,18 +1,49 @@
 import { useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack as BackArrow } from "react-icons/io";
 import { IoMdArrowRoundForward as ForwardArrow } from "react-icons/io";
+import { MdOutlineLogin as Login } from "react-icons/md";
+import { FaHandMiddleFinger as Logout } from "react-icons/fa";
 import { FaFireAlt as Fire } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { BiSolidHome as Home } from "react-icons/bi";
+import { SiBaremetrics as Register } from "react-icons/si";
+import { SiGoogletagmanager as ManagePosts } from "react-icons/si";
+import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const LeftNav = () => {
+  const { logout, isLoggedIn } = useAuth();
   const links = [
     {
       title: "Home",
       icon: <Home />,
       path: "/",
+      forLogIn: isLoggedIn,
+    },
+    {
+      title: "Log In",
+      icon: <Login />,
+      path: "/access/login",
+      forLogIn: false,
+    },
+    {
+      title: "Register",
+      icon: <Register />,
+      path: "/access/register",
+      forLogIn: false,
+    },
+    {
+      title: "Manage Posts",
+      icon: <ManagePosts />,
+      path: "/admin",
+      forLogIn: true,
+    },
+    {
+      title: "Log Out",
+      icon: <Logout />,
+      fun: () => logout(),
+      forLogIn: true,
     },
   ];
   const [tags, setTags] = useState([]);
@@ -29,7 +60,7 @@ const LeftNav = () => {
 
   const fetchTags = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/tags`);
+      const response = await axios.get(`${baseUrl}/tags?page=1&limit=20`);
       setTags(response.data.tags);
       setLoading(false);
     } catch (error) {
@@ -62,17 +93,31 @@ const LeftNav = () => {
             </button>
           </div>
 
-          <ul>
-            {links.map((l, i) => (
-              <li
-                key={`link.${i}`}
-                className="bg-slate-500 hover:bg-opacity-50 hover:text-emerald-500 transition rounded-md cursor-pointer"
-              >
-                <Link to={l.path} className="flex items-center gap-2 px-2 py-1">
-                  {l.icon} {l.title}
-                </Link>
-              </li>
-            ))}
+          <ul className="flex flex-col gap-2">
+            {links
+              .filter((l) => l.forLogIn === isLoggedIn)
+              .map((l, i) => (
+                <li
+                  key={`link.${i}`}
+                  className="bg-slate-500 hover:bg-opacity-50 hover:text-emerald-500 transition rounded-md cursor-pointer"
+                >
+                  {l.fun ? (
+                    <button
+                      onClick={l.fun}
+                      className="flex items-center gap-2 px-2 py-1"
+                    >
+                      {l.icon} {l.title}
+                    </button>
+                  ) : (
+                    <Link
+                      to={l.path}
+                      className="flex items-center gap-2 px-2 py-1"
+                    >
+                      {l.icon} {l.title}
+                    </Link>
+                  )}
+                </li>
+              ))}
           </ul>
 
           {loading ? (

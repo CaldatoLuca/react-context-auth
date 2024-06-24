@@ -15,6 +15,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             value={value}
             onChange={onChange}
             className=" rounded-md text-neutral-900 outline-none px-1 cursor-pointer"
+            required
           />
         </div>
       );
@@ -27,6 +28,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             value={value}
             onChange={onChange}
             className=" rounded-md text-neutral-900"
+            required
           />
         </div>
       );
@@ -39,6 +41,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             name={name}
             onChange={onChange}
             className=" rounded-md"
+            required
           />
         </div>
       );
@@ -51,6 +54,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             value={value}
             onChange={onChange}
             className=" rounded-md text-neutral-900"
+            required
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>

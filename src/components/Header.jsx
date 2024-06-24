@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { FaHandPeace as Hi } from "react-icons/fa6";
 
 const Header = () => {
+  const { isLoggedIn, logout } = useAuth();
   return (
     <header className="sticky top-0 z-40 backdrop-blur border-b border-slate-50/[0.1]">
       <div className="flex justify-between items-center h-full py-4">
@@ -15,14 +18,28 @@ const Header = () => {
         </Link>
 
         <nav>
-          <ul className="flex items-center gap-5 text-slate-200">
-            <li className="hover:bg-opacity-80 transition cursor-pointer bg-emerald-500 rounded-md px-3 py-1">
-              <Link to={"/access/login"}>Log In</Link>
-            </li>
-            <li className="hover:text-emerald-300 transition cursor-pointer ">
-              Sign Up
-            </li>{" "}
-          </ul>
+          {isLoggedIn ? (
+            <ul className="flex items-center gap-5 text-slate-200">
+              <li className="flex items-center gap-1">
+                Hi <Hi className="text-yellow-500"></Hi> Username
+              </li>
+              <li className="hover:bg-opacity-80 transition cursor-pointer bg-emerald-500 rounded-md px-3 py-1">
+                <Link to={"/admin"}>Manage Posts</Link>
+              </li>
+              <li className="hover:text-emerald-300 transition cursor-pointer ">
+                <button onClick={() => logout()}>Log Out</button>
+              </li>{" "}
+            </ul>
+          ) : (
+            <ul className="flex items-center gap-5 text-slate-200">
+              <li className="hover:bg-opacity-80 transition cursor-pointer bg-emerald-500 rounded-md px-3 py-1">
+                <Link to={"/access/login"}>Log In</Link>
+              </li>
+              <li className="hover:text-emerald-300 transition cursor-pointer ">
+                Sign Up
+              </li>{" "}
+            </ul>
+          )}
         </nav>
       </div>
     </header>

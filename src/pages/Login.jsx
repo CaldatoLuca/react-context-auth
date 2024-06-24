@@ -1,9 +1,11 @@
 import InputElement from "../components/InputElement";
 import useForm from "../useForm";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
   const location = useLocation();
+  const { login } = useAuth();
 
   const { message } = location.state || {};
 
@@ -19,6 +21,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const { email, password } = formValues;
+    const user = { email, password };
+    login(user);
+
     resetForm();
   };
 
