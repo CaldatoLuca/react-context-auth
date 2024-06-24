@@ -38,7 +38,10 @@ const AccessLayout = () => {
                 </div>
               </>
             ) : (
-              <div>Hi, please fill the form to complete registration</div>
+              <>
+                <div>Welcome to ReactiveX</div>
+                <div>Fill the Form to complete the registration</div>
+              </>
             )}
           </div>
         </div>

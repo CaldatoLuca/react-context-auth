@@ -16,6 +16,13 @@ const AuthProvider = ({ children }) => {
     navigate(from);
   };
 
+  const register = (user) => {
+    setIsLoggedIn(true);
+    setUser(user);
+    const from = location.state?.from?.pathname || "/";
+    navigate(from);
+  };
+
   const logout = () => {
     setIsLoggedIn(false);
     setUser(null);
@@ -27,6 +34,7 @@ const AuthProvider = ({ children }) => {
     user,
     login,
     logout,
+    register,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

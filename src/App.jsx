@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import PostsByTag from "./pages/PostsByTag";
 import AccessLayout from "./layouts/AccessLayout";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import ManagePosts from "./pages/auth/managePosts";
 import PrivatePages from "./middlewares/PrivatePages";
 
@@ -23,7 +24,7 @@ function App() {
         </Route>
         <Route path="/access" element={<AccessLayout />}>
           <Route path="login" element={<Login />} />
-          {/* <Route path="register" element={<PostsByTag />} /> */}
+          <Route path="register" element={<Register />} />
         </Route>
 
         {/* Rotte private protette da middl */}
