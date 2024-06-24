@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ManagePosts from "./pages/auth/managePosts";
 import PrivatePages from "./middlewares/PrivatePages";
-
+import AddPost from "./pages/auth/AddPost";
 function App() {
   return (
     <div className="container mx-auto lining-nums">
@@ -38,6 +38,7 @@ function App() {
           }
         >
           <Route index element={<ManagePosts />} />
+          <Route path="add-post" element={<AddPost />} />
         </Route>
 
         {/* Not Found */}

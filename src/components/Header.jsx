@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { FaHandPeace as Hi } from "react-icons/fa6";
+import { FaPlus as AddPost } from "react-icons/fa6";
 
 const Header = () => {
   const { isLoggedIn, logout, user } = useAuth();
@@ -25,6 +26,11 @@ const Header = () => {
               </li>
               <li className="hover:bg-opacity-80 transition cursor-pointer bg-emerald-500 rounded-md px-3 py-1">
                 <Link to={"/admin"}>Manage Posts</Link>
+              </li>
+              <li className="hover:text-orange-300 transition cursor-pointer text-xl font-bold">
+                <Link to={"/admin/add-post"}>
+                  <AddPost></AddPost>
+                </Link>
               </li>
               <li className="hover:text-emerald-300 transition cursor-pointer ">
                 <button onClick={() => logout()}>Log Out</button>

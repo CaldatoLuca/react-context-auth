@@ -40,7 +40,12 @@ const Details = () => {
           <h2 className="text-3xl text-emerald-500 font-semibold mb-2">
             {post.title}
           </h2>
-          <div>Made by Username</div>
+          <div>
+            Made by{" "}
+            <span className="text-orange-500 font-semibold text-lg">
+              {post.user.name}
+            </span>
+          </div>
         </div>
 
         {post.image || post.image === "" ? (

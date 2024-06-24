@@ -11,6 +11,7 @@ const PostCard = ({
   category,
   userImg,
   slug,
+  user,
 }) => {
   const baseImgUrl = import.meta.env.VITE_SERVER_IMAGE_URL;
 
@@ -19,6 +20,7 @@ const PostCard = ({
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
+    console.log(user);
   };
 
   return (
@@ -62,18 +64,20 @@ const PostCard = ({
         {/* User */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            {userImg ? (
+            {user.image ? (
               <figure className="w-8 h-8 rounded-full overflow-hidden">
                 <img
-                  src={userImg}
+                  src={user.image}
                   alt=""
                   className="w-full h-full object-cover"
                 />
               </figure>
             ) : (
-              <div className="w-8 h-8 rounded-full overflow-hidden bg-emerald-600"></div>
+              <div className="w-8 h-8 rounded-full overflow-hidden bg-emerald-600 flex  justify-center items-center">
+                {user.name[0]}
+              </div>
             )}
-            <span className="text-slate-200">Username</span>
+            <span className="text-slate-200">{user.name}</span>
           </div>
 
           <div className="bg-emerald-500 text-slate-200 p-1 rounded-md">

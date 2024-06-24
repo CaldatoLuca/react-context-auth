@@ -14,6 +14,7 @@ const PostList = ({ posts }) => {
               published={p.published}
               category={p.category.name}
               slug={p.slug}
+              user={p.user}
               key={p.id}
             ></PostCard>
           ))}
