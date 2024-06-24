@@ -6,11 +6,14 @@ import NotFound from "./pages/NotFound";
 import PostsByTag from "./pages/PostsByTag";
 import AccessLayout from "./layouts/AccessLayout";
 import Login from "./pages/Login";
+import ManagePosts from "./pages/auth/managePosts";
+import PrivatePages from "./middlewares/PrivatePages";
 
 function App() {
   return (
     <div className="container mx-auto lining-nums">
       <Routes>
+        {/* Rotte Pubbliche */}
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<Home />} />
         </Route>
@@ -22,6 +25,21 @@ function App() {
           <Route path="login" element={<Login />} />
           {/* <Route path="register" element={<PostsByTag />} /> */}
         </Route>
+
+        {/* Rotte private protette da middl */}
+
+        <Route
+          path="/admin"
+          element={
+            <PrivatePages>
+              <BaseLayout />
+            </PrivatePages>
+          }
+        >
+          <Route index element={<ManagePosts />} />
+        </Route>
+
+        {/* Not Found */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
