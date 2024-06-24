@@ -28,7 +28,7 @@ const LeftNav = () => {
       forLogIn: false,
     },
     {
-      title: "Register",
+      title: "Sign Up",
       icon: <Register />,
       path: "/access/register",
       forLogIn: false,

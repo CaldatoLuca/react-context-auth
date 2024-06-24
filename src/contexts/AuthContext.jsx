@@ -6,19 +6,22 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const login = (user) => {
+  const login = (user, token) => {
     setIsLoggedIn(true);
     setUser(user);
+    setToken(token);
     const from = location.state?.from?.pathname || "/";
     navigate(from);
   };
 
-  const register = (user) => {
+  const register = (user, token) => {
     setIsLoggedIn(true);
     setUser(user);
+    setToken(token);
     const from = location.state?.from?.pathname || "/";
     navigate(from);
   };

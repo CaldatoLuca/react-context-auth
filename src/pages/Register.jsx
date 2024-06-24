@@ -1,9 +1,11 @@
 import InputElement from "../components/InputElement";
 import useForm from "../useForm";
 import { useAuth } from "../contexts/AuthContext";
+import axios from "axios";
 
 const Register = () => {
   const { register } = useAuth();
+  const baseUrl = import.meta.env.VITE_SERVER_URL;
 
   const formFields = [
     { type: "text", name: "name", label: "Name" },
@@ -19,12 +21,29 @@ const Register = () => {
     password: "",
   });
 
+  const registerUser = async () => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/auth/register`,
+        formValues,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const user = response.data.user;
+      const token = response.data.token;
+      register(user, token);
+    } catch (error) {
+      console.error("Error fetching post:", error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { name, image, email, password } = formValues;
-    const user = { name, image, email, password };
-    register(user);
+    registerUser();
 
     resetForm();
   };
@@ -48,7 +67,7 @@ const Register = () => {
             type="submit"
             className=" p-1 px-2 bg-neutral-100 text-neutral-900 mt-6 rounded-md"
           >
-            Login
+            Register
           </button>
         </div>
       </form>
