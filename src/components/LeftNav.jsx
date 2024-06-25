@@ -7,6 +7,7 @@ import { FaFireAlt as Fire } from "react-icons/fa";
 import { BiSolidHome as Home } from "react-icons/bi";
 import { SiBaremetrics as Register } from "react-icons/si";
 import { SiGoogletagmanager as ManagePosts } from "react-icons/si";
+import { FaPlus as AddPost } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
@@ -37,6 +38,12 @@ const LeftNav = () => {
       title: "Manage Posts",
       icon: <ManagePosts />,
       path: "/admin",
+      forLogIn: true,
+    },
+    {
+      title: "Add Post",
+      icon: <AddPost />,
+      path: "/admin/add-post",
       forLogIn: true,
     },
     {
